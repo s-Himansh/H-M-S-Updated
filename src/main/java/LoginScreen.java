@@ -86,21 +86,21 @@ public class LoginScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
-                if (authenticate(username, password)) {
+                ResultSet userDetails = authenticate(username, password);
+                if (userDetails != null) {
                     JOptionPane.showMessageDialog(LoginScreen.this, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    // Open dashboard according to role
                     switch (role) {
                         case "Admin":
-                            new AdminDashboard().setVisible(true);
+                            new AdminDashboard(userDetails).setVisible(true);
                             break;
                         case "Doctor":
-                            new DoctorDashboard().setVisible(true);
+                            // new DoctorDashboard(userDetails).setVisible(true);
                             break;
                         case "Nurse":
-                            new NurseDashboard().setVisible(true);
+                            // new NurseDashboard(userDetails).setVisible(true);
                             break;
                         case "Patient":
-                            new PatientDashboard().setVisible(true);
+                            new PatientDashboard(userDetails).setVisible(true);
                             break;
                     }
                     dispose(); // Close the login window
@@ -112,17 +112,21 @@ public class LoginScreen extends JFrame {
         return button;
     }
 
-    private boolean authenticate(String username, String password) {
+    private ResultSet authenticate(String username, String password) {
         // Database authentication logic
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hms", "root", "sharma");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + username + "' AND PASSWORD = '" + password + "' AND role = '" + role.toLowerCase() + "'");
-            return rs.next();
+            if (rs.next()) {
+                return rs; // Return the ResultSet containing user details
+            } else {
+                return null; // Invalid credentials
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 
