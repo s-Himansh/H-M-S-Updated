@@ -46,7 +46,7 @@ public class AdminDashboard extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open Manage Doctors window
-                JOptionPane.showMessageDialog(AdminDashboard.this, "Manage Doctors clicked");
+                new ManageDoctorsDialog().setVisible(true);
             }
         });
 
@@ -55,7 +55,7 @@ public class AdminDashboard extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open Manage Appointments window
-                JOptionPane.showMessageDialog(AdminDashboard.this, "Manage Appointments clicked");
+                new ManageAppointmentsDialog().setVisible(true);
             }
         });
 
