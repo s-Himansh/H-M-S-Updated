@@ -2,9 +2,12 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.*;
 
 public class ManagePatientsDialog extends JDialog {
@@ -14,6 +17,7 @@ public class ManagePatientsDialog extends JDialog {
      private JButton addButton;
      private JButton updateButton;
      private JButton deleteButton;
+     private JTextField searchField;
 
      public ManagePatientsDialog() {
           initializeComponents();
@@ -46,6 +50,22 @@ public class ManagePatientsDialog extends JDialog {
 
           // Add button panel to main panel
           mainPanel.add(buttonPanel, BorderLayout.NORTH);
+
+          // Add search field
+          searchField = new JTextField();
+          searchField.setPreferredSize(new Dimension(200, 25));
+          searchField.setToolTipText("Search by patient name");
+          searchField.addKeyListener(new KeyAdapter() {
+               @Override
+               public void keyReleased(KeyEvent e) {
+                    String query = searchField.getText().trim();
+                    filterTable(query);
+               }
+          });
+          JPanel searchPanel = new JPanel();
+          searchPanel.add(new JLabel("Search: "));
+          searchPanel.add(searchField);
+          mainPanel.add(searchPanel, BorderLayout.SOUTH);
 
           // Create patients table
           patientsTable = new JTable();
@@ -159,6 +179,13 @@ public class ManagePatientsDialog extends JDialog {
           fetchPatients(); // Refresh the table after updating patient details
      }
 
+     private void filterTable(String query) {
+          DefaultTableModel model = (DefaultTableModel) patientsTable.getModel();
+          TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+          patientsTable.setRowSorter(sorter);
+          sorter.setRowFilter(RowFilter.regexFilter("(?i)" + query)); // Case insensitive search
+     }
+
      // Custom table cell renderer to style the table
      private static class CustomTableCellRenderer extends DefaultTableCellRenderer {
           public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -170,19 +197,16 @@ public class ManagePatientsDialog extends JDialog {
 
                // Set padding for cells
                if (cell instanceof JComponent) {
-                    ((JComponent) cell).setBorder(new EmptyBorder(5, 10, 5, 10));
+                    ((JComponent) cell).setBorder(new EmptyBorder(5, 10,5, 5));
                }
 
                // Alternate row colors
-               if (row % 2 == 0) {
                     cell.setBackground(Color.WHITE);
-               } else {
-                    cell.setBackground(Color.LIGHT_GRAY);
-               }
+
 
                // Highlight selected row
                if (isSelected) {
-                    cell.setBackground(Color.CYAN);
+                    cell.setBackground(new Color(143, 188, 219));
                }
 
                return cell;
@@ -195,3 +219,4 @@ public class ManagePatientsDialog extends JDialog {
           });
      }
 }
+

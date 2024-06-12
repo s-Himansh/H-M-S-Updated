@@ -36,7 +36,8 @@ public class AdminDashboard extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Open Manage Patients window
-                JOptionPane.showMessageDialog(AdminDashboard.this, "Manage Patients clicked");
+                // JOptionPane.showMessageDialog(AdminDashboard.this, "Manage Patients clicked");
+                new ManagePatientsDialog().setVisible(true);
             }
         });
 
