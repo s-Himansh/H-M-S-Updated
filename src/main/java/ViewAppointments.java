@@ -1,11 +1,9 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ViewAppointments extends JFrame {
      private Connection connection;
@@ -22,6 +20,7 @@ public class ViewAppointments extends JFrame {
 
           // Create main panel
           JPanel mainPanel = new JPanel(new BorderLayout());
+          mainPanel.setBackground(Color.WHITE); // Set background color
 
           // Fetch and display appointments
           fetchAppointments();
@@ -32,6 +31,9 @@ public class ViewAppointments extends JFrame {
 
           // Set main panel as content pane
           setContentPane(mainPanel);
+
+          // Apply styling
+          applyStyling();
      }
 
      private void fetchAppointments() {
@@ -65,14 +67,38 @@ public class ViewAppointments extends JFrame {
           }
      }
 
+     private void applyStyling() {
+          // Set font for table headers
+          JTableHeader header = appointmentsTable.getTableHeader();
+          header.setFont(new Font("Arial", Font.BOLD, 14));
+          header.setBackground(Color.WHITE); // Set header background color
+          header.setForeground(Color.BLACK); // Set header text color
+
+          // Set font for table cells
+          appointmentsTable.setFont(new Font("Arial", Font.PLAIN, 12));
+
+          // Set background color for even and odd rows
+          appointmentsTable.setBackground(Color.WHITE); // Set cell background color
+          appointmentsTable.setSelectionBackground(new Color(204, 255, 255)); // Set selected row background color
+
+          // Add padding and border to cells
+          appointmentsTable.setIntercellSpacing(new Dimension(10, 5)); // Add padding
+          appointmentsTable.setRowHeight(30); // Set row height
+          appointmentsTable.setShowGrid(true); // Show grid lines
+          appointmentsTable.setGridColor(Color.LIGHT_GRAY); // Set grid color
+          appointmentsTable.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2)); // Set border
+
+          // Center align table data
+          DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+          centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+          appointmentsTable.setDefaultRenderer(Object.class, centerRenderer);
+     }
+
      public static void main(String[] args) {
-          SwingUtilities.invokeLater(new Runnable() {
-               @Override
-               public void run() {
-                    // For testing purposes, pass a sample user ID
-                    int sampleUserId = 6;
-                    new ViewAppointments(sampleUserId).setVisible(true);
-               }
+          SwingUtilities.invokeLater(() -> {
+               // For testing purposes, pass a sample user ID
+               int sampleUserId = 6;
+               new ViewAppointments(sampleUserId).setVisible(true);
           });
      }
 }

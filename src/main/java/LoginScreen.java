@@ -94,7 +94,7 @@ public class LoginScreen extends JFrame {
                             new AdminDashboard(userDetails).setVisible(true);
                             break;
                         case "Doctor":
-                            // new DoctorDashboard(userDetails).setVisible(true);
+                            new DoctorDashboard(userDetails).setVisible(true);
                             break;
                         case "Nurse":
                             // new NurseDashboard(userDetails).setVisible(true);
