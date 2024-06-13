@@ -25,7 +25,7 @@ public class ViewMedicalRecordsDialog extends JDialog {
           setSize(800, 600); // Adjust size as needed
           setLocationRelativeTo(null);
 
-          // Create panel for filter components
+
           JPanel filterPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
           JLabel filterLabel = new JLabel("Filter by patient ID:");
           patientIdFilterField = new JTextField(10);
@@ -50,7 +50,7 @@ public class ViewMedicalRecordsDialog extends JDialog {
                statement.setInt(1, doctorId);
                ResultSet resultSet = statement.executeQuery();
 
-               // Create a table model with appropriate column names
+
                DefaultTableModel model = new DefaultTableModel() {
                     @Override
                     public Class<?> getColumnClass(int columnIndex) {
@@ -63,7 +63,7 @@ public class ViewMedicalRecordsDialog extends JDialog {
                model.addColumn("Treatment");
                model.addColumn("Record Date");
 
-               // Populate the table model with data from the result set
+
                while (resultSet.next()) {
                     int recordId = resultSet.getInt("record_id");
                     int patientId = resultSet.getInt("patient_id");
@@ -74,12 +74,12 @@ public class ViewMedicalRecordsDialog extends JDialog {
                     model.addRow(new Object[]{recordId, patientId, diagnosis, treatment, recordDate});
                }
 
-               // Create medical records table with the model
+
                medicalRecordsTable = new JTable(model);
                medicalRecordsTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-               medicalRecordsTable.setRowHeight(40); // Increase row height
+               medicalRecordsTable.setRowHeight(40);
 
-               // Apply custom cell renderer to give padding and thick border
+
                medicalRecordsTable.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
                     private final Border paddingBorder = BorderFactory.createEmptyBorder(10, 10, 5, 10);
                     private final Border thickBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
@@ -87,12 +87,12 @@ public class ViewMedicalRecordsDialog extends JDialog {
                     @Override
                     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                          JLabel cellComponent = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                         cellComponent.setBorder(BorderFactory.createCompoundBorder(thickBorder, paddingBorder)); // Add thick border
+                         cellComponent.setBorder(BorderFactory.createCompoundBorder(thickBorder, paddingBorder)); // Adding thick border
                          return cellComponent;
                     }
                });
 
-               // Add table to a scroll pane and add it to the dialog
+
                JScrollPane scrollPane = new JScrollPane(medicalRecordsTable);
                getContentPane().add(scrollPane, BorderLayout.CENTER);
           } catch (SQLException e) {
@@ -117,8 +117,8 @@ public class ViewMedicalRecordsDialog extends JDialog {
 
      public static void main(String[] args) {
           SwingUtilities.invokeLater(() -> {
-               // For testing purposes, pass a sample doctor ID
-               int sampleDoctorId = 2; // Provide the doctor ID
+
+               int sampleDoctorId = 2;
                new ViewMedicalRecordsDialog(sampleDoctorId).setVisible(true);
           });
      }

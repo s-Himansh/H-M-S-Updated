@@ -18,7 +18,7 @@ public class LoginScreen extends JFrame {
     public LoginScreen(String role) {
         this.role = role;
 
-        // Initialize components
+
         mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50)); // Add padding
         mainPanel.setBackground(Color.WHITE); // Set background color
@@ -30,7 +30,7 @@ public class LoginScreen extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        // Add labels for input fields
+
         JLabel usernameLabel = new JLabel("Username:");
         usernameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         mainPanel.add(usernameLabel, gbc);
@@ -58,29 +58,29 @@ public class LoginScreen extends JFrame {
         setTitle(role + " Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack(); // Pack the frame to preferred size
-        setLocationRelativeTo(null); // Center the frame on the screen
+        setLocationRelativeTo(null);
     }
 
     private JTextField createStyledTextField() {
-        JTextField textField = new JTextField(20); // Set preferred width
-        textField.setFont(new Font("Arial", Font.PLAIN, 16)); // Set font
+        JTextField textField = new JTextField(20);
+        textField.setFont(new Font("Arial", Font.PLAIN, 16));
         return textField;
     }
 
     private JPasswordField createStyledPasswordField() {
-        JPasswordField passwordField = new JPasswordField(20); // Set preferred width
-        passwordField.setFont(new Font("Arial", Font.PLAIN, 16)); // Set font
+        JPasswordField passwordField = new JPasswordField(20);
+        passwordField.setFont(new Font("Arial", Font.PLAIN, 16));
         return passwordField;
     }
 
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.BOLD, 16)); // Set font
-        button.setForeground(Color.WHITE); // Set text color
-        button.setBackground(new Color(30, 144, 255)); // Set background color
-        button.setFocusPainted(false); // Remove focus paint
-        button.setBorderPainted(false); // Remove border paint
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Change cursor to hand on hover
+        button.setFont(new Font("Arial", Font.BOLD, 16));
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(30, 144, 255));
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -103,7 +103,7 @@ public class LoginScreen extends JFrame {
                             new PatientDashboard(userDetails).setVisible(true);
                             break;
                     }
-                    dispose(); // Close the login window
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(LoginScreen.this, "Invalid credentials!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -113,7 +113,7 @@ public class LoginScreen extends JFrame {
     }
 
     private ResultSet authenticate(String username, String password) {
-        // Database authentication logic
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hms", "root", "sharma");

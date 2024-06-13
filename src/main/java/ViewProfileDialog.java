@@ -18,10 +18,9 @@ public class ViewProfileDialog extends JDialog {
      private void initializeComponents() {
           setTitle("View Profile");
           setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-          setSize(600, 300); // Increased width and height
+          setSize(600, 300);
           setLocationRelativeTo(null);
 
-          // Increase default font size for all labels
           UIManager.put("Label.font", new Font("Arial", Font.PLAIN, 16));
      }
 
@@ -33,7 +32,6 @@ public class ViewProfileDialog extends JDialog {
                ResultSet resultSet = statement.executeQuery();
 
                if (resultSet.next()) {
-                    // Extract patient data
                     String name = resultSet.getString("name");
                     int age = resultSet.getInt("age");
                     String gender = resultSet.getString("gender");
@@ -67,12 +65,12 @@ public class ViewProfileDialog extends JDialog {
 
      private void addLabel(JPanel panel, GridBagConstraints gbc, String labelText, String value) {
           JLabel label = new JLabel(labelText);
-          label.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1)); // Border color and thickness
+          label.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1));
           gbc.gridx = 0;
           panel.add(label, gbc);
 
           JLabel valueLabel = new JLabel(value);
-          valueLabel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1)); // Border color and thickness
+          valueLabel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1));
           gbc.gridx = 1;
           panel.add(valueLabel, gbc);
 

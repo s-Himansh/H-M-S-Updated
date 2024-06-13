@@ -18,29 +18,24 @@ public class AppointmentForm extends JFrame {
      public AppointmentForm(int patientId) {
           this.patientId = patientId;
           System.out.println("id is " + patientId);
-          // Initialize components and set up the appointment form
           setTitle("Appointment Form");
           setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-          setSize(400, 200); // Set the size as needed
-          setLocationRelativeTo(null); // Center the window on the screen
+          setSize(400, 200);
+          setLocationRelativeTo(null);
 
-          // Create main panel
           JPanel mainPanel = new JPanel(new GridLayout(3, 2, 10, 10));
 
-          // Add components for doctor selection
           JLabel doctorLabel = new JLabel("Select Doctor:");
           doctorComboBox = new JComboBox<>();
-          populateDoctors(); // Populate doctor names in combo box
+          populateDoctors();
           mainPanel.add(doctorLabel);
           mainPanel.add(doctorComboBox);
 
-          // Add components for appointment date selection
           JLabel dateLabel = new JLabel("Appointment Date:");
           dateField = new JTextField();
           mainPanel.add(dateLabel);
           mainPanel.add(dateField);
 
-          // Add submit button
           JButton submitButton = new JButton("Submit");
           submitButton.addActionListener(new ActionListener() {
                @Override
@@ -48,10 +43,9 @@ public class AppointmentForm extends JFrame {
                     submitAppointment();
                }
           });
-          mainPanel.add(new JLabel()); // Placeholder
+          mainPanel.add(new JLabel());
           mainPanel.add(submitButton);
 
-          // Set main panel as content pane
           setContentPane(mainPanel);
      }
 
@@ -86,11 +80,11 @@ public class AppointmentForm extends JFrame {
                     insertStatement.setInt(1, patientId);
                     insertStatement.setInt(2, doctorId);
                     insertStatement.setString(3, date);
-                    insertStatement.setString(4, "Scheduled"); // Initial status
+                    insertStatement.setString(4, "Pending");
                     insertStatement.executeUpdate();
 
                     JOptionPane.showMessageDialog(this, "Appointment scheduled successfully!");
-                    dispose(); // Close the appointment form
+                    dispose();
                } else {
                     JOptionPane.showMessageDialog(this, "Doctor not found!");
                }
@@ -105,7 +99,6 @@ public class AppointmentForm extends JFrame {
           SwingUtilities.invokeLater(new Runnable() {
                @Override
                public void run() {
-                    // For testing purposes, pass a sample patient ID
                     int samplePatientId = 6;
                     new AppointmentForm(samplePatientId).setVisible(true);
                }

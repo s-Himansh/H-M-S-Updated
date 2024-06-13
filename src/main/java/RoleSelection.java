@@ -14,7 +14,7 @@ public class RoleSelection extends JFrame {
     private JButton patientButton;
 
     public RoleSelection() {
-        // Initialize the main panel and buttons
+        // Initializing the main panel and buttons
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(4, 1, 10, 10)); // Add horizontal and vertical gaps
 
@@ -29,18 +29,16 @@ public class RoleSelection extends JFrame {
         mainPanel.add(nurseButton);
         mainPanel.add(patientButton);
 
-        // Add padding around the main panel
+
         mainPanel.setBorder(new EmptyBorder(40, 40, 40, 40)); // Adjust padding for larger screens
 
-        // Set the content pane to main panel with a titled border
         setContentPane(mainPanel);
-        mainPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK, 2), "Select your role user"));
+        mainPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK, 2), "UR CARE"));
         setTitle("Role Selection");
-        setSize(400, 400); // Increase size for better visibility
-        setLocationRelativeTo(null); // Center the frame on the screen
+        setSize(500, 500);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Add action listeners to the buttons
         addActionListeners(adminButton, "Admin");
         addActionListeners(doctorButton, "Doctor");
         addActionListeners(nurseButton, "Nurse");
@@ -49,23 +47,23 @@ public class RoleSelection extends JFrame {
 
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Hack", Font.BOLD, 16)); // Increase font size for better visibility
-        button.setForeground(Color.WHITE); // Set text color
-        button.setContentAreaFilled(false); // Make the button transparent
-        button.setFocusPainted(false); // Remove focus paint
-        button.setBorderPainted(false); // Remove border paint
-        button.setOpaque(true); // Make the button opaque for background color
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Change cursor to hand on hover
-        button.setPreferredSize(new Dimension(200, 50)); // Set preferred size
+        button.setFont(new Font("Hack", Font.BOLD, 16));
+        button.setForeground(Color.WHITE);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setOpaque(true);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        button.setPreferredSize(new Dimension(200, 50));
 
         // Add hover effect
         button.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
-                button.setBackground(new Color(70, 130, 180)); // Change background color on hover
+                button.setBackground(new Color(70, 130, 180));
             }
 
             public void mouseExited(MouseEvent e) {
-                button.setBackground(new Color(143, 188, 219)); // Restore background color on exit
+                button.setBackground(new Color(143, 188, 219));
             }
         });
 

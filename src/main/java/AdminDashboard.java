@@ -17,11 +17,11 @@ public class AdminDashboard extends JFrame {
     static ResultSet user ;
     public AdminDashboard(ResultSet userDetails) {
         user = userDetails;
-        // Initialize components and set up the admin dashboard
+
         setTitle("Admin Dashboard");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600); // Set the size as needed
-        setLocationRelativeTo(null); // Center the window on the screen
+        setSize(800, 600);
+        setLocationRelativeTo(null);
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
@@ -30,12 +30,12 @@ public class AdminDashboard extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(20, 20, 20, 20);
 
-        // Add buttons to the dashboard
+
         managePatientsButton = createStyledButton("Manage Patients");
         managePatientsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Open Manage Patients window
+
                 // JOptionPane.showMessageDialog(AdminDashboard.this, "Manage Patients clicked");
                 new ManagePatientsDialog().setVisible(true);
             }
@@ -45,7 +45,7 @@ public class AdminDashboard extends JFrame {
         manageDoctorsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Open Manage Doctors window
+
                 new ManageDoctorsDialog().setVisible(true);
             }
         });
@@ -54,7 +54,7 @@ public class AdminDashboard extends JFrame {
         manageAppointmentsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Open Manage Appointments window
+
                 new ManageAppointmentsDialog().setVisible(true);
             }
         });
@@ -63,7 +63,7 @@ public class AdminDashboard extends JFrame {
         viewMedicalRecordsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Open View Medical Records window
+
                 JOptionPane.showMessageDialog(AdminDashboard.this, "View Medical Records clicked");
             }
         });
@@ -72,12 +72,11 @@ public class AdminDashboard extends JFrame {
         manageBillingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Open Manage Billing window
+
                 JOptionPane.showMessageDialog(AdminDashboard.this, "Manage Billing clicked");
             }
         });
 
-        // Add buttons to the panel
         gbc.gridx = 0;
         gbc.gridy = 0;
         mainPanel.add(managePatientsButton, gbc);
@@ -94,28 +93,26 @@ public class AdminDashboard extends JFrame {
         gbc.gridy++;
         mainPanel.add(manageBillingButton, gbc);
 
-        // Set the content pane
         setContentPane(mainPanel);
     }
 
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.BOLD, 16)); // Set font
-        button.setForeground(Color.WHITE); // Set text color
-        button.setBackground(new Color(143, 188, 219)); // Set background color
-        button.setFocusPainted(false); // Remove focus paint
-        button.setBorderPainted(false); // Remove border paint
-        button.setOpaque(true); // Make the button opaque for background color
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Change cursor to hand on hover
+        button.setFont(new Font("Arial", Font.BOLD, 16));
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(143, 188, 219));
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setOpaque(true);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        // Add hover effect
         button.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
-                button.setBackground(new Color(70, 130, 180)); // Change background color on hover
+                button.setBackground(new Color(70, 130, 180));
             }
 
             public void mouseExited(MouseEvent e) {
-                button.setBackground(new Color(143, 188, 219)); // Restore background color on exit
+                button.setBackground(new Color(143, 188, 219));
             }
         });
 

@@ -41,7 +41,6 @@ public class ViewDoctorAppointmentsDialog extends JDialog {
                model.addColumn("Appointment Date");
                model.addColumn("Status");
 
-               // Populate the table model with data from the result set
                while (resultSet.next()) {
                     int appointmentId = resultSet.getInt("appointment_id");
                     int patientId = resultSet.getInt("patient_id");
@@ -51,12 +50,11 @@ public class ViewDoctorAppointmentsDialog extends JDialog {
                     model.addRow(new Object[]{appointmentId, patientId, appointmentDate, status});
                }
 
-               // Create appointments table with the model
                appointmentsTable = new JTable(model);
                appointmentsTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
                appointmentsTable.setRowHeight(40); // Increase row height
 
-               // Apply custom cell renderer to give padding and style to all columns
+               // Applying custom cell renderer to give padding and style to all columns
                appointmentsTable.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
                     private final Border paddingBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10);
                     private final Border thickBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
@@ -64,13 +62,12 @@ public class ViewDoctorAppointmentsDialog extends JDialog {
                     @Override
                     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                          JLabel cellComponent = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                         cellComponent.setBorder(BorderFactory.createCompoundBorder(thickBorder, paddingBorder)); // Add padding and thick border
-                         cellComponent.setHorizontalAlignment(SwingConstants.CENTER); // Center-align cell content
+                         cellComponent.setBorder(BorderFactory.createCompoundBorder(thickBorder, paddingBorder)); // Adding padding and thick border
+                         cellComponent.setHorizontalAlignment(SwingConstants.CENTER);
                          return cellComponent;
                     }
                });
 
-               // Add table to a scroll pane and add it to the dialog
                JScrollPane scrollPane = new JScrollPane(appointmentsTable);
                getContentPane().add(scrollPane, BorderLayout.CENTER);
           } catch (SQLException e) {
@@ -80,7 +77,6 @@ public class ViewDoctorAppointmentsDialog extends JDialog {
 
      public static void main(String[] args) {
           SwingUtilities.invokeLater(() -> {
-               // For testing purposes, pass a sample doctor ID
                int sampleDoctorId = 2; // Provide the doctor ID
                new ViewDoctorAppointmentsDialog(sampleDoctorId).setVisible(true);
           });
